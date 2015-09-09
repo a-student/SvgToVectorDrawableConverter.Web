@@ -1,7 +1,48 @@
-.dz-container {
-    margin: 20px 0;
+body {
+    padding-bottom: 40px;
+    overflow-y: scroll;
 }
 
-.result .actions {
+.actions {
     float: right;
+}
+
+.dropzone {
+    margin: 20px 0;
+    border: 2px dashed #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    color: #777;
+}
+
+.dropzone .dz-size,
+.dropzone .dz-filename {
+    display: none;
+}
+
+.dropzone .dz-preview.dz-image-preview {
+    background-color: transparent;
+}
+
+.dropzone .dz-preview .dz-image {
+    overflow: visible;
+}
+
+.dropzone .dz-preview .dz-image img {
+    width: 100%;
+    height: 100%;
+}
+
+.dropzone .dz-preview:hover .dz-image img {
+    -webkit-transform: none;
+    -moz-transform: none;
+    -ms-transform: none;
+    -o-transform: none;
+    transform: none;
+    -webkit-filter: none;
+    filter: none;
+}
+
+.dropzone .dz-preview.dz-error .dz-error-message {
+    display: none;
 }

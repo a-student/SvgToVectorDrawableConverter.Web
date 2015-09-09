@@ -10,11 +10,12 @@
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <!-- Custom styles -->
-    <link rel="stylesheet" href="css/custom.css">
 
     <link rel="stylesheet" href="css/dropzone.css">
     <script src="js/dropzone.js"></script>
+
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="css/custom.css">
 
     <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
 
@@ -55,17 +56,21 @@
 
     <div class="container">
 
-        <div class="dz-container">
-            <form id="drop-zone" class="dropzone" action="http://193.124.64.166/api/svg2vd/v1">
-                <input type="hidden" name="lib" />
-                <div class="dz-message"><b>Drop</b> SVG file here or <u>click</u> to open file dialog.</div>
-            </form>
-        </div>
+        <form id="drop-zone" class="dropzone" action="http://193.124.64.166/api/svg2vd/v1">
+            <input type="hidden" name="lib" />
+            <div class="dz-message">
+                <h1>
+                    <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+                    <b>Drop</b> SVG file here or <u>click</u> to open file dialog.
+                </h1>
+            </div>
+        </form>
 
         <div id="output-warning" class="alert alert-warning" role="alert"></div>
         <div id="output-error" class="alert alert-danger" role="alert"></div>
+        <div id="error-alert" class="alert alert-danger" role="alert"></div>
 
-        <div id="result" class="result">
+        <div id="result">
             <div class="btn-group actions" role="group" aria-label="Actions">
                 <button type="button" class="btn btn-default" onclick="saveToFile()">Save to file <span class="glyphicon glyphicon-save" aria-hidden="true"></span></button>
                 <button type="button" class="btn btn-default" onclick="selectCode()">Select code</button>

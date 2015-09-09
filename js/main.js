@@ -1,3 +1,4 @@
+$("#error-alert").hide();
 $("#output-warning").hide();
 $("#output-error").hide();
 $("#result").hide();
@@ -7,6 +8,7 @@ Dropzone.options.dropZone = {
     init: function () {
 
         this.on("addedfile", function (file) {
+            $("#error-alert").hide();
             $("#output-warning").hide();
             $("#output-error").hide();
             $("#result").hide();
@@ -21,6 +23,7 @@ Dropzone.options.dropZone = {
             var output = response.output.trim();
             if (output.length > 0) {
                 output = output.replace("[", "<strong>").replace("]", "!</strong>");
+                output = recognizeLinks(output);
                 if (output.match(/\Werror/i)) {
                     $("#output-error").html(output);
                     $("#output-error").show();
@@ -41,8 +44,12 @@ Dropzone.options.dropZone = {
         });
 
         this.on("error", function (file, errorMessage, xhr) {
-            $("#output-error").html(errorMessage);
-            $("#output-error").show();
+            $("#error-alert").html('<div><p>' + errorMessage + '</p></div><button type="button" class="btn btn-danger" onclick="resubmit()">Retry</button>');
+            $("#error-alert").show();
+        });
+
+        this.on("canceled", function (file) {
+            $("#error-alert").hide();
         });
 
         this.on("queuecomplete", function () {
@@ -52,19 +59,22 @@ Dropzone.options.dropZone = {
     }
 };
 
+function resubmit() {
+    var dropZone = Dropzone.forElement("#drop-zone");
+    var file = dropZone.files[0];
+    if (file) {
+        dropZone.removeAllFiles(true);
+        dropZone.addFile(file);
+    }
+}
+
 function changeLib(sender) {
     var text = $(sender).text();
     var lib = $("#lib");
     if (lib.text() !== text) {
         lib.text(text);
         $("[name='lib']").val(sender.id == "lib-default" ? "" : text);
-
-        var dropZone = Dropzone.forElement("#drop-zone");
-        var file = dropZone.files[0];
-        if (file) {
-            dropZone.removeAllFiles(true);
-            dropZone.addFile(file);
-        }
+        resubmit();
     }
 }
 
@@ -88,4 +98,11 @@ function selectCode() {
         selection.removeAllRanges();
         selection.addRange(range);
     }
+}
+
+function recognizeLinks(html) {
+    var regex = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+    return html.replace(regex, function (url) {
+        return '<a href="' + url + '">' + url + '</a>';
+    });
 }
