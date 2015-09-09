@@ -34,6 +34,9 @@ Dropzone.options.dropZone = {
                 $("#result-name").text(response.result[0].name);
                 $("#result-data").text(response.result[0].data);
                 $("#result").show();
+
+                $("#result-data").removeClass("prettyprinted");
+                PR.prettyPrint();
             }
         });
 
