@@ -13,6 +13,9 @@
     <!-- Custom styles -->
     <link rel="stylesheet" href="css/custom.css">
 
+    <link rel="stylesheet" href="css/dropzone.css">
+    <script src="js/dropzone.js"></script>
+
     <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -52,9 +55,11 @@
 
     <div class="container">
 
-        <div class="starter-template">
-            <h1>Bootstrap starter template</h1>
-            <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
+        <div class="dz-container">
+            <form id="drop-zone" class="dropzone" action="http://193.124.64.166/api/svg2vd/v1">
+                <input type="hidden" name="lib" />
+                <div class="dz-message"><b>Drop</b> SVG file here or <u>click</u> to open file dialog.</div>
+            </form>
         </div>
 
         <div class="alert alert-success" role="alert">
