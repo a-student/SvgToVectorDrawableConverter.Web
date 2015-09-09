@@ -40,7 +40,7 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="dropdown">
+                    <li id="lib-dropdown" class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span id="lib"></span> <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a role="button" onclick="changeLib(this)" id="lib-default">Android 5.0+</a></li>
@@ -62,29 +62,19 @@
             </form>
         </div>
 
-        <div class="alert alert-success" role="alert">
-            <strong>Well done!</strong> You successfully read this important alert message.
-        </div>
-        <div class="alert alert-info" role="alert">
-            <strong>Heads up!</strong> This alert needs your attention, but it's not super important.
-        </div>
-        <div class="alert alert-warning" role="alert">
-            <strong>Warning!</strong> Better check yourself, you're not looking too good.
-        </div>
-        <div class="alert alert-danger" role="alert">
-            <strong>Oh snap!</strong> Change a few things up and try submitting again.
-        </div>
+        <div id="output-warning" class="alert alert-warning" role="alert"></div>
+        <div id="output-error" class="alert alert-danger" role="alert"></div>
 
-        <div class="result">
+        <div id="result" class="result">
             <div class="btn-group actions" role="group" aria-label="Actions">
-                <button type="button" class="btn btn-default">Save to file <span class="glyphicon glyphicon-save" aria-hidden="true"></span></button>
-                <button type="button" class="btn btn-default">Select code</button>
+                <button type="button" class="btn btn-default" onclick="saveToFile()">Save to file <span class="glyphicon glyphicon-save" aria-hidden="true"></span></button>
+                <button type="button" class="btn btn-default" onclick="selectCode()">Select code</button>
             </div>
 
-            <h2 class="page-header">file_name.xml</h2>
+            <h2 id="result-name" class="page-header"></h2>
 
             <!--?prettify lang=xml?-->
-            <pre></pre>
+            <pre id="result-data"></pre>
         </div>
 
         <hr>
@@ -107,6 +97,7 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/ie10-viewport-bug-workaround.js"></script>
 
+    <script src="js/FileSaver.min.js"></script>
     <script src="js/main.js"></script>
 
 </body>
