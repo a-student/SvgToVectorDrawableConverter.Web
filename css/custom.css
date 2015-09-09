@@ -1,4 +1,8 @@
 .starter-template {
-  padding: 40px 15px;
-  text-align: center;
+    padding: 40px 15px;
+    text-align: center;
+}
+
+.result .actions {
+    float: right;
 }
