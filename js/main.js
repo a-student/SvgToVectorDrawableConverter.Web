@@ -10,7 +10,7 @@ Dropzone.options.dropZone = {
             $("#output-warning").hide();
             $("#output-error").hide();
             $("#result").hide();
-            $("#lib-dropdown").addClass("disabled");
+            $("#lib-button").parent().andSelf().addClass("disabled");
 
             while (this.files[1]) {
                 this.removeFile(this.files[0]);
@@ -21,7 +21,7 @@ Dropzone.options.dropZone = {
             var output = response.output.trim();
             if (output.length > 0) {
                 output = output.replace("[", "<strong>").replace("]", "!</strong>");
-                if (output.match(/\Werror\W/i)) {
+                if (output.match(/\Werror/i)) {
                     $("#output-error").html(output);
                     $("#output-error").show();
                 } else {
@@ -46,7 +46,7 @@ Dropzone.options.dropZone = {
         });
 
         this.on("queuecomplete", function () {
-            $("#lib-dropdown").removeClass("disabled");
+            $("#lib-button").parent().andSelf().removeClass("disabled");
         });
 
     }
