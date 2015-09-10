@@ -8,10 +8,10 @@ Dropzone.options.dropZone = {
     init: function () {
 
         this.on("addedfile", function (file) {
-            $("#error-alert").hide();
-            $("#output-warning").hide();
-            $("#output-error").hide();
-            $("#result").hide();
+            $("#error-alert").fadeOut("fast");
+            $("#output-warning").fadeOut("fast");
+            $("#output-error").fadeOut("fast");
+            $("#result").fadeOut("fast");
             $("#lib-button").parent().andSelf().addClass("disabled");
 
             while (this.files[1]) {
@@ -26,17 +26,17 @@ Dropzone.options.dropZone = {
                 output = recognizeLinks(output);
                 if (output.match(/\Werror/i)) {
                     $("#output-error").html(output);
-                    $("#output-error").show();
+                    $("#output-error").fadeIn();
                 } else {
                     $("#output-warning").html(output);
-                    $("#output-warning").show();
+                    $("#output-warning").fadeIn();
                 }
             }
 
             if (response.result.length > 0) {
                 $("#result-name").text(response.result[0].name);
                 $("#result-data").text(response.result[0].data);
-                $("#result").show();
+                $("#result").fadeIn();
 
                 $("#result-data").removeClass("prettyprinted");
                 PR.prettyPrint();
@@ -45,7 +45,7 @@ Dropzone.options.dropZone = {
 
         this.on("error", function (file, errorMessage, xhr) {
             $("#error-alert").html('<div><p>' + errorMessage + '</p></div><button type="button" class="btn btn-danger" onclick="resubmit()">Retry</button>');
-            $("#error-alert").show();
+            $("#error-alert").fadeIn();
         });
 
         this.on("canceled", function (file) {
