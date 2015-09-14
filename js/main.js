@@ -17,19 +17,37 @@ Dropzone.options.dropZone = {
             while (this.files[1]) {
                 this.removeFile(this.files[0]);
             }
+
+            if (yaCounter32422355) {
+                yaCounter32422355.reachGoal('addedfile', { lib: $("#lib").text() });
+            }
         });
 
         this.on("success", function (file, response) {
             var output = response.output.trim();
             if (output.length > 0) {
+                var message = output.substring(output.indexOf(":") + 1).trim();
+
                 output = output.replace("[", "<strong>").replace("]", "!</strong>");
                 output = recognizeLinks(output);
                 if (output.match(/\Werror/i)) {
                     $("#output-error").html(output);
                     $("#output-error").fadeIn();
+
+                    if (yaCounter32422355) {
+                        yaCounter32422355.reachGoal('success-error', { success_error: message });
+                    }
                 } else {
                     $("#output-warning").html(output);
                     $("#output-warning").fadeIn();
+
+                    if (yaCounter32422355) {
+                        yaCounter32422355.reachGoal('success-warning', { success_warning: message });
+                    }
+                }
+            } else {
+                if (yaCounter32422355) {
+                    yaCounter32422355.reachGoal('success-ok');
                 }
             }
 
@@ -46,6 +64,10 @@ Dropzone.options.dropZone = {
         this.on("error", function (file, errorMessage, xhr) {
             $("#error-alert").html('<div><p>' + errorMessage + '</p></div><button type="button" class="btn btn-danger" onclick="resubmit()">Retry</button>');
             $("#error-alert").fadeIn();
+
+            if (yaCounter32422355) {
+                yaCounter32422355.reachGoal('error', { error_message: errorMessage });
+            }
         });
 
         this.on("canceled", function (file) {
