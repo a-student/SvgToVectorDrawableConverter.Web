@@ -29,6 +29,7 @@ Dropzone.options.dropZone = {
                 var message = output.substring(output.indexOf(":") + 1).trim();
 
                 output = output.replace("[", "<strong>").replace("]", "!</strong>");
+                output = output.replace(/(\r\n|\r|\n)/g, "<br />");
                 output = recognizeLinks(output);
                 if (output.match(/\Werror/i)) {
                     $("#output-error").html(output);
