@@ -3,6 +3,14 @@ body {
     overflow-y: scroll;
 }
 
+.navbar-form {
+	border-bottom: none;
+}
+
+.navbar-form label {
+	margin-top: 5px;
+}
+
 .actions {
     float: right;
 }

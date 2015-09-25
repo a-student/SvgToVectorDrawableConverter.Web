@@ -13,6 +13,7 @@ Dropzone.options.dropZone = {
             $("#output-error").fadeOut("fast");
             $("#result").fadeOut("fast");
             $("#lib-button").parent().andSelf().addClass("disabled");
+            $("#fix-fill-type").attr("disabled", true);
 
             while (this.files[1]) {
                 this.removeFile(this.files[0]);
@@ -39,6 +40,9 @@ Dropzone.options.dropZone = {
                         yaCounter32422355.reachGoal('success-error', { success_error: message });
                     }
                 } else {
+                    if (output.match(/Try specifying the --fix-fill-type option/)) {
+                        output = '<div><p>' + output + '</p></div><button type="button" class="btn btn-warning" onclick="checkFixFillType()">Specify --fix-fill-type</button>';
+                    }
                     $("#output-warning").html(output);
                     $("#output-warning").fadeIn();
 
@@ -77,6 +81,7 @@ Dropzone.options.dropZone = {
 
         this.on("queuecomplete", function () {
             $("#lib-button").parent().andSelf().removeClass("disabled");
+            $("#fix-fill-type").attr("disabled", false);
         });
 
     }
@@ -101,7 +106,33 @@ function changeLib(sender) {
     }
 }
 
-changeLib($("#lib-default")[0]);
+function updateFixFillTypeVisibility() {
+    if (Cookies.get("used-fix-fill-type")) {
+        $("#fix-fill-type-form").fadeIn();
+    } else {
+        $("#fix-fill-type-form").hide();
+    }
+}
+
+function changeFixFillType(used) {
+    var checked = $("#fix-fill-type").prop("checked");
+    $("[name='fix-fill-type']").val(checked ? "on" : "off");
+    if (used) {
+        Cookies.set("used-fix-fill-type", true);
+    }
+    updateFixFillTypeVisibility();
+    resubmit();
+}
+
+window.onload = function () {
+    changeLib($("#lib-default")[0]);
+    changeFixFillType(false);
+};
+
+function checkFixFillType() {
+    $("#fix-fill-type").prop("checked", true);
+    changeFixFillType(true);
+}
 
 function saveToFile() {
     var blob = new Blob([$("#result-data").text()], { type: "text/xml;charset=utf-8" });
@@ -126,6 +157,6 @@ function selectCode() {
 function recognizeLinks(html) {
     var regex = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
     return html.replace(regex, function (url) {
-        return '<a href="' + url + '">' + url + '</a>';
+        return '<a href="' + url + '" class="alert-link">' + url + '</a>';
     });
 }
