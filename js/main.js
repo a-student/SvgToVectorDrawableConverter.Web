@@ -96,12 +96,15 @@ function resubmit() {
     }
 }
 
-function changeLib(sender) {
+function changeLib(sender, val) {
     var text = $(sender).text();
+    if (val === undefined) {
+        val = text;
+    }
     var lib = $("#lib");
     if (lib.text() !== text) {
         lib.text(text);
-        $("[name='lib']").val(sender.id == "lib-default" ? "" : text);
+        $("[name='lib']").val(sender.id == "lib-default" ? "" : val);
         resubmit();
     }
 }
