@@ -12,13 +12,6 @@
 
     <title>SVG to Vector Drawable Converter – Convert SVG images to Android VectorDrawable XML resource files online</title>
 
-    <script>
-        // redirect to HTTP (from HTTPS) because we make requests to HTTP backend, which are blocked by browser
-        if (window.location.protocol !== "http:") {
-            window.location.href = "http:" + window.location.href.substring(window.location.protocol.length);
-        }
-    </script>
-
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
@@ -76,7 +69,7 @@
 
     <div class="container">
 
-        <form id="drop-zone" class="dropzone" action="http://193.124.64.166/api/svg2vd/v1">
+        <form id="drop-zone" class="dropzone" action="https://193.124.64.166/api/svg2vd/v1">
             <input type="hidden" name="lib" />
             <input type="hidden" name="fix-fill-type" />
             <div class="dz-message">
